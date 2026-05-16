@@ -856,47 +856,57 @@ new Chart(document.getElementById('barMotivosDetalle'),{type:'bar',data:{labels:
 
 // RANKING INTEGRAL VENDEDORES
 (function(){
-  const vendors=[
-    {name:'Valentina Mármol',contactos:28,reuniones:14,ventas:3,diasCierre:38},
+  var vendors=[
+    {name:'Valentina Marmol',contactos:28,reuniones:14,ventas:3,diasCierre:38},
     {name:'Santiago Ruiz',   contactos:35,reuniones:16,ventas:3,diasCierre:42},
     {name:'Marcos Torres',   contactos:31,reuniones:12,ventas:1,diasCierre:55},
-    {name:'Laura Benítez',   contactos:28,reuniones:11,ventas:1,diasCierre:51},
+    {name:'Laura Benitez',   contactos:28,reuniones:11,ventas:1,diasCierre:51},
     {name:'Diego Ferreyra',  contactos:20,reuniones:8, ventas:0,diasCierre:null},
   ];
-  const maxV=3,maxR=16,maxC=35;
-  vendors.forEach(v=>{
+  var maxV=3,maxR=16,maxC=35;
+  vendors.forEach(function(v){
     v.convPct=v.contactos>0?(v.ventas/v.contactos*100):0;
-    const sVentas=(v.ventas/maxV)*100;
-    const sConv=Math.min((v.convPct/10.7)*100,100);
-    const sReun=(v.reuniones/maxR)*100;
-    const sCont=(v.contactos/maxC)*100;
+    var sVentas=(v.ventas/maxV)*100;
+    var sConv=Math.min((v.convPct/10.7)*100,100);
+    var sReun=(v.reuniones/maxR)*100;
+    var sCont=(v.contactos/maxC)*100;
     v.score=Math.round(sVentas*0.4+sConv*0.3+sReun*0.2+sCont*0.1);
   });
-  vendors.sort((a,b)=>b.score-a.score);
-  const medals=['🥇','🥈','🥉','4°','5°'];
-  const sc=s=>s>=70?'cell-g':s>=40?'cell-y':'cell-r';
-  const cc=c=>c>=8?'cell-g':c>=4?'cell-y':'cell-r';
-  const rc=r=>r>=14?'cell-g':r>=10?'cell-y':'cell-r';
-  const dc=d=>d===null?'cell-g':d<=45?'cell-g':d<=52?'cell-y':'cell-r';
-  const dv=d=>d===null?'—':d+'d';
-  const vc=v=>v>=2?'cell-g':v>=1?'cell-y':'cell-r';
-  const body=document.getElementById('rankingBody');
-  vendors.forEach((v,i)=>{
-    body.innerHTML+=<tr>
-      <td style="font-weight:700;font-size:14px">+medals[i]+</td>
-      <td style="font-weight:600">+v.name+</td>
-      <td style="text-align:center">+v.contactos+</td>
-      <td style="text-align:center"><span class="+rc(v.reuniones)+">+v.reuniones+</span></td>
-      <td style="text-align:center"><span class="+vc(v.ventas)+">+v.ventas+</span></td>
-      <td style="text-align:center"><span class="+cc(v.convPct)+">+v.convPct.toFixed(1)+%</span></td>
-      <td style="text-align:center"><span class="+dc(v.diasCierre)+">+dv(v.diasCierre)+</span></td>
-      <td style="text-align:center"><span class="+sc(v.score)+" style="font-size:14px;padding:4px 12px">+v.score+</span></td>
-    </tr>;
+  vendors.sort(function(a,b){return b.score-a.score;});
+  var medals=['🥇','🥈','🥉','4°','5°'];
+  function sc(s){return s>=70?'cell-g':s>=40?'cell-y':'cell-r';}
+  function cc(c){return c>=8?'cell-g':c>=4?'cell-y':'cell-r';}
+  function rc(r){return r>=14?'cell-g':r>=10?'cell-y':'cell-r';}
+  function dc(d){return d===null?'cell-g':d<=45?'cell-g':d<=52?'cell-y':'cell-r';}
+  function dv(d){return d===null?'—':d+'d';}
+  function vc(v){return v>=2?'cell-g':v>=1?'cell-y':'cell-r';}
+  var body=document.getElementById('rankingBody');
+  vendors.forEach(function(v,i){
+    var row='<tr>';
+    row+='<td style="font-weight:700;font-size:15px">'+medals[i]+'</td>';
+    row+='<td style="font-weight:600">'+v.name+'</td>';
+    row+='<td style="text-align:center">'+v.contactos+'</td>';
+    row+='<td style="text-align:center"><span class="'+rc(v.reuniones)+'">'+v.reuniones+'</span></td>';
+    row+='<td style="text-align:center"><span class="'+vc(v.ventas)+'">'+v.ventas+'</span></td>';
+    row+='<td style="text-align:center"><span class="'+cc(v.convPct)+'">'+v.convPct.toFixed(1)+'%</span></td>';
+    row+='<td style="text-align:center"><span class="'+dc(v.diasCierre)+'">'+dv(v.diasCierre)+'</span></td>';
+    row+='<td style="text-align:center"><span class="'+sc(v.score)+'" style="font-size:14px;padding:4px 12px">'+v.score+'</span></td>';
+    row+='</tr>';
+    body.innerHTML+=row;
   });
-  const tot=vendors.reduce((a,v)=>({contactos:a.contactos+v.contactos,reuniones:a.reuniones+v.reuniones,ventas:a.ventas+v.ventas}),{contactos:0,reuniones:0,ventas:0});
-  const avg=Math.round(vendors.reduce((a,v)=>a+v.score,0)/vendors.length);
-  const gc=(tot.ventas/tot.contactos*100).toFixed(1)+'%';
-  body.innerHTML+=<tr style="font-weight:700;background:var(--lighter)"><td colspan="2">Total equipo</td><td style="text-align:center">+tot.contactos+</td><td style="text-align:center">+tot.reuniones+</td><td style="text-align:center">+tot.ventas+</td><td style="text-align:center"><span class="cell-g">+gc+</span></td><td style="text-align:center">47d</td><td style="text-align:center"><span class="cell-g" style="font-size:14px;padding:4px 12px">+avg+</span></td></tr>;
+  var tot=vendors.reduce(function(a,v){return{contactos:a.contactos+v.contactos,reuniones:a.reuniones+v.reuniones,ventas:a.ventas+v.ventas};},{contactos:0,reuniones:0,ventas:0});
+  var avg=Math.round(vendors.reduce(function(a,v){return a+v.score;},0)/vendors.length);
+  var gc=(tot.ventas/tot.contactos*100).toFixed(1)+'%';
+  var trow='<tr style="font-weight:700;background:var(--lighter)">';
+  trow+='<td colspan="2">Total equipo</td>';
+  trow+='<td style="text-align:center">'+tot.contactos+'</td>';
+  trow+='<td style="text-align:center">'+tot.reuniones+'</td>';
+  trow+='<td style="text-align:center">'+tot.ventas+'</td>';
+  trow+='<td style="text-align:center"><span class="cell-g">'+gc+'</span></td>';
+  trow+='<td style="text-align:center">47d</td>';
+  trow+='<td style="text-align:center"><span class="cell-g" style="font-size:14px;padding:4px 12px">'+avg+'</span></td>';
+  trow+='</tr>';
+  body.innerHTML+=trow;
 })();
 </script>
 </body>
