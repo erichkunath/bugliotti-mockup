@@ -568,65 +568,65 @@ canvas { max-height:220px; }
         </table>
         <div class="data-note">Reuniones y ventas mensuales por vendedor: <span class="src-real">campo "Vendedor" de tabla Ventas (RVN)</span>. % Lead→Reunión derivado de distribución de leads por vendedor (estimado).</div>
       </div>
-    </div>
-
 
       <!-- RANKING INTEGRAL VENDEDOR -->
-      <div class="card" style="margin-top:14px">
-        <div class="card-header">
-          <div class="card-title">Ranking Integral de Gestión — Puntaje por Vendedor</div>
-          <div class="badge gold">Combina Comercial + RVN</div>
-        </div>
+            <div class="card" style="margin-top:14px">
+              <div class="card-header">
+                <div class="card-title">Ranking Integral de Gestión — Puntaje por Vendedor</div>
+                <div class="badge gold">Combina Comercial + RVN</div>
+              </div>
+      
+              <!-- Indicadores globales del equipo -->
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;padding:14px 12px;background:var(--lighter);border-radius:8px;">
+                <div style="text-align:center;">
+                  <div style="font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--gray);font-weight:700;margin-bottom:4px">Contactos/Leads</div>
+                  <div style="font-size:26px;font-weight:900;color:var(--gold)">142</div>
+                  <div style="font-size:11px;color:var(--gray)">equipo · mes</div>
+                </div>
+                <div style="text-align:center;">
+                  <div style="font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--gray);font-weight:700;margin-bottom:4px">Reuniones</div>
+                  <div style="font-size:26px;font-weight:900;color:var(--blue)">61</div>
+                  <div style="font-size:11px;color:var(--gray)">43% de leads</div>
+                </div>
+                <div style="text-align:center;">
+                  <div style="font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--gray);font-weight:700;margin-bottom:4px">Ventas</div>
+                  <div style="font-size:26px;font-weight:900;color:var(--green)">8</div>
+                  <div style="font-size:11px;color:var(--gray)">conv. 5.6%</div>
+                </div>
+                <div style="text-align:center;">
+                  <div style="font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--gray);font-weight:700;margin-bottom:4px">Días prom. cierre</div>
+                  <div style="font-size:26px;font-weight:900;color:var(--red)">47d</div>
+                  <div style="font-size:11px;color:var(--gray)">meta ≤ 45d</div>
+                </div>
+              </div>
+      
+              <!-- Tabla ranking -->
+              <table class="data-table" id="rankingTable">
+                <thead>
+                  <tr>
+                    <th style="width:32px">#</th>
+                    <th>Vendedor</th>
+                    <th style="text-align:center">Contactos</th>
+                    <th style="text-align:center">Reuniones</th>
+                    <th style="text-align:center">Ventas</th>
+                    <th style="text-align:center">Conv. Global</th>
+                    <th style="text-align:center">Días Cierre</th>
+                    <th style="text-align:center;min-width:90px">Puntaje</th>
+                  </tr>
+                </thead>
+                <tbody id="rankingBody"></tbody>
+              </table>
+      
+              <div style="margin-top:10px;font-size:10px;color:var(--gray);font-style:italic">
+                Puntaje 0–100: Ventas 40% · Conversión 30% · Reuniones 20% · Contactos 10%. Color: 
+                <span class="cell-g" style="font-style:normal">≥70</span> 
+                <span class="cell-y" style="font-style:normal">40–69</span> 
+                <span class="cell-r" style="font-style:normal">&lt;40</span>
+              </div>
+              <div class="data-note" style="margin-top:6px">Fuente: <span class="src-real">campo "Vendedor" de tabla Ventas (RVN)</span>. Contactos estimados por distribución proporcional del total mensual.</div>
+            </div>
+    </div>
 
-        <!-- Indicadores globales del equipo -->
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;padding:14px 12px;background:var(--lighter);border-radius:8px;">
-          <div style="text-align:center;">
-            <div style="font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--gray);font-weight:700;margin-bottom:4px">Contactos/Leads</div>
-            <div style="font-size:26px;font-weight:900;color:var(--gold)">142</div>
-            <div style="font-size:11px;color:var(--gray)">equipo · mes</div>
-          </div>
-          <div style="text-align:center;">
-            <div style="font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--gray);font-weight:700;margin-bottom:4px">Reuniones</div>
-            <div style="font-size:26px;font-weight:900;color:var(--blue)">61</div>
-            <div style="font-size:11px;color:var(--gray)">43% de leads</div>
-          </div>
-          <div style="text-align:center;">
-            <div style="font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--gray);font-weight:700;margin-bottom:4px">Ventas</div>
-            <div style="font-size:26px;font-weight:900;color:var(--green)">8</div>
-            <div style="font-size:11px;color:var(--gray)">conv. 5.6%</div>
-          </div>
-          <div style="text-align:center;">
-            <div style="font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--gray);font-weight:700;margin-bottom:4px">Días prom. cierre</div>
-            <div style="font-size:26px;font-weight:900;color:var(--red)">47d</div>
-            <div style="font-size:11px;color:var(--gray)">meta ≤ 45d</div>
-          </div>
-        </div>
-
-        <!-- Tabla ranking -->
-        <table class="data-table" id="rankingTable">
-          <thead>
-            <tr>
-              <th style="width:32px">#</th>
-              <th>Vendedor</th>
-              <th style="text-align:center">Contactos</th>
-              <th style="text-align:center">Reuniones</th>
-              <th style="text-align:center">Ventas</th>
-              <th style="text-align:center">Conv. Global</th>
-              <th style="text-align:center">Días Cierre</th>
-              <th style="text-align:center;min-width:90px">Puntaje</th>
-            </tr>
-          </thead>
-          <tbody id="rankingBody"></tbody>
-        </table>
-
-        <div style="margin-top:10px;font-size:10px;color:var(--gray);font-style:italic">
-          Puntaje 0–100: Ventas 40% · Conversión 30% · Reuniones 20% · Contactos 10%. Color: 
-          <span class="cell-g" style="font-style:normal">≥70</span> 
-          <span class="cell-y" style="font-style:normal">40–69</span> 
-          <span class="cell-r" style="font-style:normal">&lt;40</span>
-        </div>
-        <div class="data-note" style="margin-top:6px">Fuente: <span class="src-real">campo "Vendedor" de tabla Ventas (RVN)</span>. Contactos estimados por distribución proporcional del total mensual.</div>
-      </div>
     <!-- ===== PERFIL DEL COMPRADOR ===== -->
     <div class="page" id="page-comprador">
       <div style="background:var(--green-bg);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:var(--green-dark)">
