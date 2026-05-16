@@ -412,11 +412,11 @@ canvas { max-height:220px; }
             <tr><td>🤝 Referidos</td><td class="num">12</td><td>40%</td><td class="hi">$0 directo</td><td><span class="pill g">Recurrente</span></td><td><span class="pill g">★★★★★ Mejor</span></td></tr>
             <tr><td>📱 Instagram / Meta</td><td class="num">9</td><td>30%</td><td class="hi">$20,800</td><td><span class="pill b">Nuevo</span></td><td><span class="pill g">★★★★ Bueno</span></td></tr>
             <tr><td>🎪 Eventos</td><td class="num">4</td><td>13%</td><td class="hi">$63,000</td><td><span class="pill b">Nuevo</span></td><td><span class="pill y">★★★ Medio</span></td></tr>
-            <tr><td>🌐 Portal Inmobiliario</td><td class="num">3</td><td>10%</td><td class="hi">$50,400</td><td><span class="pill b">Nuevo</span></td><td><span class="pill y">★★★ Medio</span></td></tr>
-            <tr><td>🚶 Caminantes</td><td class="num">2</td><td>7%</td><td>—</td><td><span class="pill b">Nuevo</span></td><td><span class="pill gr">★★ A medir</span></td></tr>
+            <tr><td>📞 Telefónico</td><td class="num">4</td><td>13%</td><td class="hi">$46,000</td><td><span class="pill b">Nuevo</span></td><td><span class="pill y">★★★ Medio</span></td></tr>
+            <tr><td>💬 WhatsApp</td><td class="num">3</td><td>10%</td><td class="hi">$61,500</td><td><span class="pill b">Nuevo</span></td><td><span class="pill y">★★★ Medio</span></td></tr>
           </tbody>
         </table>
-        <div class="data-note">Ventas por canal: <span class="src-real">campo Canal de Venta de tabla Ventas (RVN)</span>. Costo/Venta: <span class="src-real">Costo MKT/Ventas de tabla Comercial</span> distribuido por canal estimado.</div>
+        <div class="data-note">Canal de Venta disponible en tabla Ventas (RVN). Canales Telefónico y WhatsApp son <span class="src-crm">referenciales — datos ficticios</span> hasta integrar campo de origen detallado.</div>
       </div>
     </div>
 
@@ -465,12 +465,54 @@ canvas { max-height:220px; }
           <div class="data-note">Fuente: <span class="src-real">campo "Vendedor"</span> por transacción — tabla Ventas del modelo RVN.</div>
         </div>
         <div class="card">
-          <div class="card-header"><div class="card-title">Cliente Nuevo vs Referido / Recurrente</div><div class="badge green">Datos reales · RVN</div></div>
+          <div class="card-header"><div class="card-title">Comprador Final (CF) vs Inversor</div><div class="badge green">Datos reales · RVN</div></div>
           <canvas id="donutCliente"></canvas>
           <div class="data-note">Fuente: <span class="src-real">campo "Cliente Nuevo/Cliente viejo"</span> — tabla Ventas del modelo RVN.</div>
         </div>
       </div>
 
+
+      <!-- REACTIVADOS -->
+      <div class="row cols-2" style="margin-top:14px">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Prospectos Reactivados — Cantidad por Vendedor</div>
+            <div class="badge" style="background:#EDE9FE;color:#5B21B6">Datos ficticios · CRM futuro</div>
+          </div>
+          <canvas id="barReactivadosQ"></canvas>
+          <div class="data-note">Prospectos que volvieron al pipeline tras un período de inactividad. Requiere estado de prospecto en CRM para datos reales.</div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Reactivados — Conversión por Vendedor</div>
+            <div class="badge" style="background:#EDE9FE;color:#5B21B6">Datos ficticios · CRM futuro</div>
+          </div>
+          <canvas id="barReactivadosConv"></canvas>
+          <div class="data-note">% de prospectos reactivados que terminaron en venta. Identifica quién sabe aprovechar oportunidades frías.</div>
+        </div>
+      </div>
+
+      <!-- MOTIVOS DE PÉRDIDA -->
+      <div class="row cols-2" style="margin-top:14px">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Motivos de Pérdida — Categorías principales</div>
+            <div class="badge" style="background:#EDE9FE;color:#5B21B6">Datos ficticios · CRM futuro</div>
+          </div>
+          <canvas id="barMotivosCat"></canvas>
+          <div class="data-note">Tratos perdidos clasificados por categoría. Con CRM podrá registrarse el motivo al momento de marcar un trato como perdido.</div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Motivos de Pérdida — Desglose detallado</div>
+            <div class="badge" style="background:#EDE9FE;color:#5B21B6">Datos ficticios · CRM futuro</div>
+          </div>
+          <canvas id="barMotivosDetalle"></canvas>
+          <div class="data-note">
+            Clasificación: <strong>Económico</strong> (financiación, entrega, precio) · <strong>Producto</strong> (tipología, zona, amenities) · <strong>Competencia</strong> (Calipso, Proa, Pectania).
+          </div>
+        </div>
+      </div>
       <!-- SECCIÓN CRM PENDIENTE -->
       <div class="row cols-3" style="margin-top:4px">
         <div class="crm-overlay">
@@ -528,6 +570,63 @@ canvas { max-height:220px; }
       </div>
     </div>
 
+
+      <!-- RANKING INTEGRAL VENDEDOR -->
+      <div class="card" style="margin-top:14px">
+        <div class="card-header">
+          <div class="card-title">Ranking Integral de Gestión — Puntaje por Vendedor</div>
+          <div class="badge gold">Combina Comercial + RVN</div>
+        </div>
+
+        <!-- Indicadores globales del equipo -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;padding:14px 12px;background:var(--lighter);border-radius:8px;">
+          <div style="text-align:center;">
+            <div style="font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--gray);font-weight:700;margin-bottom:4px">Contactos/Leads</div>
+            <div style="font-size:26px;font-weight:900;color:var(--gold)">142</div>
+            <div style="font-size:11px;color:var(--gray)">equipo · mes</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--gray);font-weight:700;margin-bottom:4px">Reuniones</div>
+            <div style="font-size:26px;font-weight:900;color:var(--blue)">61</div>
+            <div style="font-size:11px;color:var(--gray)">43% de leads</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--gray);font-weight:700;margin-bottom:4px">Ventas</div>
+            <div style="font-size:26px;font-weight:900;color:var(--green)">8</div>
+            <div style="font-size:11px;color:var(--gray)">conv. 5.6%</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--gray);font-weight:700;margin-bottom:4px">Días prom. cierre</div>
+            <div style="font-size:26px;font-weight:900;color:var(--red)">47d</div>
+            <div style="font-size:11px;color:var(--gray)">meta ≤ 45d</div>
+          </div>
+        </div>
+
+        <!-- Tabla ranking -->
+        <table class="data-table" id="rankingTable">
+          <thead>
+            <tr>
+              <th style="width:32px">#</th>
+              <th>Vendedor</th>
+              <th style="text-align:center">Contactos</th>
+              <th style="text-align:center">Reuniones</th>
+              <th style="text-align:center">Ventas</th>
+              <th style="text-align:center">Conv. Global</th>
+              <th style="text-align:center">Días Cierre</th>
+              <th style="text-align:center;min-width:90px">Puntaje</th>
+            </tr>
+          </thead>
+          <tbody id="rankingBody"></tbody>
+        </table>
+
+        <div style="margin-top:10px;font-size:10px;color:var(--gray);font-style:italic">
+          Puntaje 0–100: Ventas 40% · Conversión 30% · Reuniones 20% · Contactos 10%. Color: 
+          <span class="cell-g" style="font-style:normal">≥70</span> 
+          <span class="cell-y" style="font-style:normal">40–69</span> 
+          <span class="cell-r" style="font-style:normal">&lt;40</span>
+        </div>
+        <div class="data-note" style="margin-top:6px">Fuente: <span class="src-real">campo "Vendedor" de tabla Ventas (RVN)</span>. Contactos estimados por distribución proporcional del total mensual.</div>
+      </div>
     <!-- ===== PERFIL DEL COMPRADOR ===== -->
     <div class="page" id="page-comprador">
       <div style="background:var(--green-bg);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:var(--green-dark)">
@@ -536,7 +635,7 @@ canvas { max-height:220px; }
 
       <div class="kpi-grid">
         <div class="kpi-card gold"><div class="kpi-label">Ticket Prom. (USD)</div><div class="kpi-value"><small>$</small>336K</div><div class="kpi-delta up">▲ +8% vs abril</div><div class="kpi-sub">Campo: Monto Total en dólares</div><div class="kpi-icon">💰</div></div>
-        <div class="kpi-card green"><div class="kpi-label">% Clientes Nuevos</div><div class="kpi-value">58<small>%</small></div><div class="kpi-delta neutral">42% referidos/recurrentes</div><div class="kpi-sub">Campo: Cliente Nuevo/viejo</div><div class="kpi-icon">🆕</div></div>
+        <div class="kpi-card green"><div class="kpi-label">% Compradores Finales (CF)</div><div class="kpi-value">62<small>%</small></div><div class="kpi-delta neutral">38% inversores</div><div class="kpi-sub">Campo: Tipo de Comprador</div><div class="kpi-icon">🆕</div></div>
         <div class="kpi-card blue"><div class="kpi-label">Precio m² prom.</div><div class="kpi-value"><small>USD</small>2.7K</div><div class="kpi-delta up">▲ vs meta USD 2.5K</div><div class="kpi-sub">Campo: Valor de m2 vendido</div><div class="kpi-icon">📐</div></div>
         <div class="kpi-card gray"><div class="kpi-label">% Pago en Efectivo</div><div class="kpi-value">38<small>%</small></div><div class="kpi-delta neutral">62% en cuotas/financiado</div><div class="kpi-sub">Campo: Forma de Pago</div><div class="kpi-icon">💵</div></div>
       </div>
@@ -548,9 +647,9 @@ canvas { max-height:220px; }
           <div class="data-note">Fuente: <span class="src-real">campo "Forma de Pago"</span> — tabla Ventas del modelo RVN.</div>
         </div>
         <div class="card">
-          <div class="card-header"><div class="card-title">Cliente Nuevo vs Referido / Recurrente</div><div class="badge green">Datos reales · RVN</div></div>
+          <div class="card-header"><div class="card-title">Comprador Final (CF) vs Inversor</div><div class="badge green">Datos reales · RVN</div></div>
           <canvas id="donutCliente2"></canvas>
-          <div class="data-note">Fuente: <span class="src-real">campo "Cliente Nuevo / Cliente viejo"</span> — tabla Ventas del modelo RVN.</div>
+          <div class="data-note">Fuente: <span class="src-real">campo "Tipo de Comprador"</span> — tabla Ventas del modelo RVN.</div>
         </div>
       </div>
 
@@ -672,7 +771,7 @@ makeGauge('gLeads',100,C.gold);   // 109% → capped at 100 visually
 makeGauge('gReuniones',98,C.gold);
 
 // DONUT ORIGEN
-new Chart(document.getElementById('donutOrigen'),{type:'doughnut',data:{labels:['Instagram','Referidos','Portal','Eventos','Caminantes','Google'],datasets:[{data:[37,20,17,13,8,5],backgroundColor:[C.gold,C.green,C.blue,C.purple,'#F59E0B',C.red],borderWidth:2,borderColor:'#fff'}]},options:{cutout:'65%',plugins:{legend:{position:'bottom'}}}});
+new Chart(document.getElementById('donutOrigen'),{type:'doughnut',data:{labels:['Instagram','Referidos','Telefónico','Eventos','WhatsApp','Google Ads'],datasets:[{data:[34,22,16,13,10,5],backgroundColor:[C.gold,C.green,C.blue,C.purple,'#F59E0B',C.red],borderWidth:2,borderColor:'#fff'}]},options:{cutout:'65%',plugins:{legend:{position:'bottom'}}}});
 
 // LINE VENTAS
 new Chart(document.getElementById('lineVentas'),{type:'line',data:{labels:MESES,datasets:[{label:'Ventas',data:[5,4,6,7,6,8],borderColor:C.gold,backgroundColor:'rgba(240,160,32,.1)',fill:true,tension:.4,pointRadius:5,pointBackgroundColor:C.gold},{label:'Meta',data:[6,6,6,7,7,8],borderColor:C.gray,borderDash:[5,4],pointRadius:0,fill:false}]},options:{scales:{y:{beginAtZero:true,grid:{color:C.light}},x:{grid:{display:false}}},plugins:{legend:{position:'bottom'}}}});
@@ -681,10 +780,10 @@ new Chart(document.getElementById('lineVentas'),{type:'line',data:{labels:MESES,
 new Chart(document.getElementById('lineConv'),{type:'line',data:{labels:MESES,datasets:[{label:'Lead → Reunión %',data:[38,36,40,42,41,43],borderColor:C.gold,tension:.4,pointRadius:4,fill:false},{label:'Reunión → Venta %',data:[14,12,15,16,13,13],borderColor:C.blue,tension:.4,pointRadius:4,fill:false},{label:'Global Lead → Venta %',data:[5.2,4.8,5.4,5.8,4.8,5.6],borderColor:C.green,tension:.4,pointRadius:4,fill:false}]},options:{scales:{y:{beginAtZero:true,max:55,ticks:{callback:v=>v+'%'},grid:{color:C.light}},x:{grid:{display:false}}},plugins:{legend:{position:'bottom'}}}});
 
 // CANAL VENTAS
-new Chart(document.getElementById('barCanalVentas2'),{type:'bar',data:{labels:['Referidos','Instagram','Eventos','Portal Inm.','Caminantes'],datasets:[{label:'Ventas cerradas',data:[12,9,4,3,2],backgroundColor:[C.green,C.gold,C.purple,C.blue,C.gray],borderRadius:6}]},options:{indexAxis:'y',scales:{x:{beginAtZero:true,grid:{color:C.light}},y:{grid:{display:false}}},plugins:{legend:{display:false}}}});
+new Chart(document.getElementById('barCanalVentas2'),{type:'bar',data:{labels:['Referidos','Instagram','Eventos','Telefónico','WhatsApp'],datasets:[{label:'Ventas cerradas',data:[12,9,4,4,3],backgroundColor:[C.green,C.gold,C.purple,C.blue,C.gray],borderRadius:6}]},options:{indexAxis:'y',scales:{x:{beginAtZero:true,grid:{color:C.light}},y:{grid:{display:false}}},plugins:{legend:{display:false}}}});
 
 // CANAL EVOL
-new Chart(document.getElementById('barCanalEvol'),{type:'bar',data:{labels:MESES,datasets:[{label:'Referidos',data:[2,1,2,3,2,3],backgroundColor:C.green,borderRadius:4},{label:'Instagram',data:[2,1,2,2,2,2],backgroundColor:C.gold,borderRadius:4},{label:'Eventos',data:[1,1,1,1,1,1],backgroundColor:C.purple,borderRadius:4},{label:'Portal',data:[0,1,1,1,1,1],backgroundColor:C.blue,borderRadius:4},{label:'Caminantes',data:[0,0,0,0,0,1],backgroundColor:C.gray,borderRadius:4}]},options:{scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:C.light}}},plugins:{legend:{position:'bottom'}}}});
+new Chart(document.getElementById('barCanalEvol'),{type:'bar',data:{labels:MESES,datasets:[{label:'Referidos',data:[2,1,2,3,2,3],backgroundColor:C.green,borderRadius:4},{label:'Instagram',data:[2,1,2,2,2,2],backgroundColor:C.gold,borderRadius:4},{label:'Eventos',data:[1,1,1,1,1,1],backgroundColor:C.purple,borderRadius:4},{label:'Telefónico',data:[1,1,2,2,2,4],backgroundColor:C.blue,borderRadius:4},{label:'WhatsApp',data:[0,0,1,1,1,3],backgroundColor:'#25D366',borderRadius:4}]},options:{scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:C.light}}},plugins:{legend:{position:'bottom'}}}});
 
 // EMBUDO TENDENCIA
 new Chart(document.getElementById('lineEmbudo'),{type:'line',data:{labels:MESES,datasets:[{label:'% Lead→Reunión',data:[38,36,40,42,41,43],borderColor:C.gold,tension:.4,pointRadius:4,fill:false},{label:'% Reunión→Venta',data:[14,12,15,16,13,13],borderColor:C.blue,tension:.4,pointRadius:4,fill:false}]},options:{scales:{y:{beginAtZero:true,max:60,ticks:{callback:v=>v+'%'},grid:{color:C.light}},x:{grid:{display:false}}},plugins:{legend:{position:'bottom'}}}});
@@ -696,13 +795,13 @@ new Chart(document.getElementById('lineCicloVida'),{type:'line',data:{labels:MES
 new Chart(document.getElementById('barCalidad2'),{type:'bar',data:{labels:MESES,datasets:[{label:'Calificados',data:[54,50,62,66,68,98],backgroundColor:C.green,borderRadius:4},{label:'Filtrados',data:[28,25,33,34,33,44],backgroundColor:'#FCA5A5',borderRadius:4}]},options:{scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:C.light}}},plugins:{legend:{position:'bottom'}}}});
 
 // CANAL GESTION
-new Chart(document.getElementById('barCanalGestion'),{type:'bar',data:{labels:['Referidos','Instagram','Eventos','Portal','Caminantes'],datasets:[{label:'Ventas',data:[12,9,4,3,2],backgroundColor:[C.green,C.gold,C.purple,C.blue,C.gray],borderRadius:6}]},options:{indexAxis:'y',scales:{x:{beginAtZero:true,grid:{color:C.light}},y:{grid:{display:false}}},plugins:{legend:{display:false}}}});
+new Chart(document.getElementById('barCanalGestion'),{type:'bar',data:{labels:['Referidos','Instagram','Eventos','Telefónico','WhatsApp'],datasets:[{label:'Ventas',data:[12,9,4,4,3],backgroundColor:[C.green,C.gold,C.purple,C.blue,C.gray],borderRadius:6}]},options:{indexAxis:'y',scales:{x:{beginAtZero:true,grid:{color:C.light}},y:{grid:{display:false}}},plugins:{legend:{display:false}}}});
 
 // VENDEDOR TREND
 new Chart(document.getElementById('lineVendTrend'),{type:'line',data:{labels:MESES,datasets:[{label:'Valentina M.',data:[2,1,2,3,2,3],borderColor:C.green,tension:.4,pointRadius:4,fill:false},{label:'Santiago R.',data:[3,2,3,2,2,3],borderColor:C.gold,tension:.4,pointRadius:4,fill:false},{label:'Marcos T.',data:[2,2,1,2,1,1],borderColor:C.blue,tension:.4,pointRadius:4,fill:false},{label:'Laura B.',data:[1,2,2,1,2,1],borderColor:C.purple,tension:.4,pointRadius:4,fill:false},{label:'Diego F.',data:[1,1,1,1,0,0],borderColor:C.red,tension:.4,pointRadius:4,fill:false,borderDash:[4,3]}]},options:{scales:{y:{beginAtZero:true,max:5,ticks:{stepSize:1},grid:{color:C.light}},x:{grid:{display:false}}},plugins:{legend:{position:'bottom'}}}});
 
 // DONUT CLIENTE (Gestión)
-new Chart(document.getElementById('donutCliente'),{type:'doughnut',data:{labels:['Cliente nuevo','Referido / Recurrente'],datasets:[{data:[58,42],backgroundColor:[C.gold,C.green],borderWidth:2,borderColor:'#fff'}]},options:{cutout:'65%',plugins:{legend:{position:'bottom'}}}});
+new Chart(document.getElementById('donutCliente'),{type:'doughnut',data:{labels:['Comprador Final (CF)','Inversor'],datasets:[{data:[62,38],backgroundColor:[C.gold,C.green],borderWidth:2,borderColor:'#fff'}]},options:{cutout:'65%',plugins:{legend:{position:'bottom'}}}});
 
 // VENDEDORES BAR
 new Chart(document.getElementById('barVend2'),{type:'bar',data:{labels:['Valentina M.','Santiago R.','Marcos T.','Laura B.','Diego F.'],datasets:[{label:'Ventas',data:[3,3,1,1,0],backgroundColor:[C.green,C.green,C.gold,C.gold,C.red],borderRadius:6},{label:'Meta',data:[2,2,2,2,2],backgroundColor:'transparent',borderColor:C.gray,borderWidth:2,type:'line',pointRadius:5,pointBackgroundColor:C.gray}]},options:{scales:{y:{beginAtZero:true,max:4,grid:{color:C.light}},x:{grid:{display:false}}},plugins:{legend:{position:'bottom'}}}});
@@ -711,7 +810,7 @@ new Chart(document.getElementById('barVend2'),{type:'bar',data:{labels:['Valenti
 new Chart(document.getElementById('donutPago'),{type:'doughnut',data:{labels:['Contado efectivo','En cuotas propio','Hipoteca / Banco','Permuta'],datasets:[{data:[38,34,20,8],backgroundColor:[C.green,C.gold,C.blue,C.purple],borderWidth:2,borderColor:'#fff'}]},options:{cutout:'65%',plugins:{legend:{position:'bottom'}}}});
 
 // DONUT CLIENTE 2
-new Chart(document.getElementById('donutCliente2'),{type:'doughnut',data:{labels:['Cliente nuevo','Referido / Recurrente'],datasets:[{data:[58,42],backgroundColor:[C.gold,C.green],borderWidth:2,borderColor:'#fff'}]},options:{cutout:'65%',plugins:{legend:{position:'bottom'}}}});
+new Chart(document.getElementById('donutCliente2'),{type:'doughnut',data:{labels:['Comprador Final (CF)','Inversor'],datasets:[{data:[62,38],backgroundColor:[C.gold,C.green],borderWidth:2,borderColor:'#fff'}]},options:{cutout:'65%',plugins:{legend:{position:'bottom'}}}});
 
 // PROVINCIA
 new Chart(document.getElementById('barProvincia'),{type:'bar',data:{labels:['Córdoba','Bs. Aires','Santa Fe','San Luis','La Rioja','Mendoza'],datasets:[{label:'Ventas',data:[22,4,2,1,1,0],backgroundColor:[C.gold,C.blue,C.green,C.purple,C.gray,'#E5E7EB'],borderRadius:6}]},options:{indexAxis:'y',scales:{x:{beginAtZero:true,grid:{color:C.light}},y:{grid:{display:false}}},plugins:{legend:{display:false}}}});
@@ -735,10 +834,70 @@ new Chart(document.getElementById('lineCostoVenta2'),{type:'line',data:{labels:M
 new Chart(document.getElementById('lineRatio2'),{type:'line',data:{labels:MESES,datasets:[{label:'Leads / Venta',data:[16.4,18.75,15.8,14.3,16.8,17.8],borderColor:C.green,backgroundColor:'rgba(16,185,129,.1)',fill:true,tension:.4,pointRadius:5,pointBackgroundColor:C.green},{label:'Meta (≤20)',data:[20,20,20,20,20,20],borderColor:C.gray,borderDash:[5,4],pointRadius:0,fill:false}]},options:{scales:{y:{beginAtZero:false,min:10,max:25,grid:{color:C.light}},x:{grid:{display:false}}},plugins:{legend:{position:'bottom'}}}});
 
 // CANAL MKT
-new Chart(document.getElementById('barCanalMkt'),{type:'bar',data:{labels:MESES,datasets:[{label:'Referidos',data:[2,1,2,3,2,3],backgroundColor:C.green,borderRadius:4},{label:'Instagram',data:[2,1,2,2,2,2],backgroundColor:C.gold,borderRadius:4},{label:'Eventos',data:[1,1,1,1,1,1],backgroundColor:C.purple,borderRadius:4},{label:'Portal',data:[0,1,1,1,1,1],backgroundColor:C.blue,borderRadius:4}]},options:{scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:C.light}}},plugins:{legend:{position:'bottom'}}}});
+new Chart(document.getElementById('barCanalMkt'),{type:'bar',data:{labels:MESES,datasets:[{label:'Referidos',data:[2,1,2,3,2,3],backgroundColor:C.green,borderRadius:4},{label:'Instagram',data:[2,1,2,2,2,2],backgroundColor:C.gold,borderRadius:4},{label:'Eventos',data:[1,1,1,1,1,1],backgroundColor:C.purple,borderRadius:4},{label:'Telefónico',data:[1,1,2,2,2,4],backgroundColor:C.blue,borderRadius:4},{label:'WhatsApp',data:[0,0,1,1,1,3],backgroundColor:'#25D366',borderRadius:4}]},options:{scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:C.light}}},plugins:{legend:{position:'bottom'}}}});
 
 // MKT LEADS
 new Chart(document.getElementById('barMktLeads2'),{type:'bar',data:{labels:MESES,datasets:[{label:'Inversión ($K)',data:[140,120,155,170,160,185],backgroundColor:'rgba(240,160,32,.25)',borderColor:C.gold,borderWidth:2,borderRadius:6,yAxisID:'y'},{label:'Leads',data:[82,75,95,100,101,142],borderColor:C.green,backgroundColor:'transparent',type:'line',tension:.4,pointRadius:5,pointBackgroundColor:C.green,yAxisID:'y1'}]},options:{scales:{y:{beginAtZero:true,grid:{color:C.light},ticks:{callback:v=>'$'+v+'K'}},y1:{beginAtZero:true,position:'right',grid:{display:false}},x:{grid:{display:false}}},plugins:{legend:{position:'bottom'}}}});
+
+// REACTIVADOS — cantidad por vendedor
+const vendNames = ['Valentina M.','Santiago R.','Marcos T.','Laura B.','Diego F.'];
+new Chart(document.getElementById('barReactivadosQ'),{type:'bar',data:{labels:vendNames,datasets:[{label:'Reactivados',data:[8,6,5,4,2],backgroundColor:[C.green,C.gold,C.gold,C.gold,C.red],borderRadius:6}]},options:{scales:{y:{beginAtZero:true,grid:{color:C.light}},x:{grid:{display:false}}},plugins:{legend:{display:false}}}});
+
+// REACTIVADOS — conversión por vendedor
+new Chart(document.getElementById('barReactivadosConv'),{type:'bar',data:{labels:vendNames,datasets:[{label:'% conversión reactivados',data:[25,17,20,25,0],backgroundColor:[C.green,C.gold,C.gold,C.green,C.red],borderRadius:6}]},options:{scales:{y:{beginAtZero:true,max:40,ticks:{callback:v=>v+'%'},grid:{color:C.light}},x:{grid:{display:false}}},plugins:{legend:{display:false}}}});
+
+// MOTIVOS PÉRDIDA — categorías
+new Chart(document.getElementById('barMotivosCat'),{type:'bar',data:{labels:['Económico','Competencia','Producto'],datasets:[{label:'Tratos perdidos',data:[18,14,10],backgroundColor:[C.red,C.purple,C.gold],borderRadius:6}]},options:{indexAxis:'y',scales:{x:{beginAtZero:true,grid:{color:C.light}},y:{grid:{display:false}}},plugins:{legend:{display:false}},layout:{padding:{right:20}}}});
+
+// MOTIVOS PÉRDIDA — desglose
+const motivosLabels = ['Precio','Financiación','Entrega','Calipso','Proa','Pectania','Tipología','Zona','Amenities'];
+const motivosColors = [C.red,C.red,'#FCA5A5',C.purple,'#A78BFA','#DDD6FE',C.gold,'#FCD34D','#FEF3C7'];
+new Chart(document.getElementById('barMotivosDetalle'),{type:'bar',data:{labels:motivosLabels,datasets:[{label:'Casos',data:[9,6,3,7,4,3,4,4,2],backgroundColor:motivosColors,borderRadius:6}]},options:{indexAxis:'y',scales:{x:{beginAtZero:true,grid:{color:C.light}},y:{grid:{display:false}}},plugins:{legend:{display:false}}}});
+
+// RANKING INTEGRAL VENDEDORES
+(function(){
+  const vendors=[
+    {name:'Valentina Mármol',contactos:28,reuniones:14,ventas:3,diasCierre:38},
+    {name:'Santiago Ruiz',   contactos:35,reuniones:16,ventas:3,diasCierre:42},
+    {name:'Marcos Torres',   contactos:31,reuniones:12,ventas:1,diasCierre:55},
+    {name:'Laura Benítez',   contactos:28,reuniones:11,ventas:1,diasCierre:51},
+    {name:'Diego Ferreyra',  contactos:20,reuniones:8, ventas:0,diasCierre:null},
+  ];
+  const maxV=3,maxR=16,maxC=35;
+  vendors.forEach(v=>{
+    v.convPct=v.contactos>0?(v.ventas/v.contactos*100):0;
+    const sVentas=(v.ventas/maxV)*100;
+    const sConv=Math.min((v.convPct/10.7)*100,100);
+    const sReun=(v.reuniones/maxR)*100;
+    const sCont=(v.contactos/maxC)*100;
+    v.score=Math.round(sVentas*0.4+sConv*0.3+sReun*0.2+sCont*0.1);
+  });
+  vendors.sort((a,b)=>b.score-a.score);
+  const medals=['🥇','🥈','🥉','4°','5°'];
+  const sc=s=>s>=70?'cell-g':s>=40?'cell-y':'cell-r';
+  const cc=c=>c>=8?'cell-g':c>=4?'cell-y':'cell-r';
+  const rc=r=>r>=14?'cell-g':r>=10?'cell-y':'cell-r';
+  const dc=d=>d===null?'cell-g':d<=45?'cell-g':d<=52?'cell-y':'cell-r';
+  const dv=d=>d===null?'—':d+'d';
+  const vc=v=>v>=2?'cell-g':v>=1?'cell-y':'cell-r';
+  const body=document.getElementById('rankingBody');
+  vendors.forEach((v,i)=>{
+    body.innerHTML+=<tr>
+      <td style="font-weight:700;font-size:14px">+medals[i]+</td>
+      <td style="font-weight:600">+v.name+</td>
+      <td style="text-align:center">+v.contactos+</td>
+      <td style="text-align:center"><span class="+rc(v.reuniones)+">+v.reuniones+</span></td>
+      <td style="text-align:center"><span class="+vc(v.ventas)+">+v.ventas+</span></td>
+      <td style="text-align:center"><span class="+cc(v.convPct)+">+v.convPct.toFixed(1)+%</span></td>
+      <td style="text-align:center"><span class="+dc(v.diasCierre)+">+dv(v.diasCierre)+</span></td>
+      <td style="text-align:center"><span class="+sc(v.score)+" style="font-size:14px;padding:4px 12px">+v.score+</span></td>
+    </tr>;
+  });
+  const tot=vendors.reduce((a,v)=>({contactos:a.contactos+v.contactos,reuniones:a.reuniones+v.reuniones,ventas:a.ventas+v.ventas}),{contactos:0,reuniones:0,ventas:0});
+  const avg=Math.round(vendors.reduce((a,v)=>a+v.score,0)/vendors.length);
+  const gc=(tot.ventas/tot.contactos*100).toFixed(1)+'%';
+  body.innerHTML+=<tr style="font-weight:700;background:var(--lighter)"><td colspan="2">Total equipo</td><td style="text-align:center">+tot.contactos+</td><td style="text-align:center">+tot.reuniones+</td><td style="text-align:center">+tot.ventas+</td><td style="text-align:center"><span class="cell-g">+gc+</span></td><td style="text-align:center">47d</td><td style="text-align:center"><span class="cell-g" style="font-size:14px;padding:4px 12px">+avg+</span></td></tr>;
+})();
 </script>
 </body>
 </html>
